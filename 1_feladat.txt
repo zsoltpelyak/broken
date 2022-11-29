@@ -1,0 +1,29 @@
+clear
+px=[30 45 55];
+py=[10 -10 0];
+
+plot(px, py, 'mx')
+
+axis equal; hold on;
+
+syms t
+x(t)=0*t;
+y(t)=0*t;
+m = 2;
+
+for i=0:m
+    bin(t)=nchoosek(m, i)*t^i*(1-t)^(m-i);
+    x(t)=x(t)+px(i+1)*bin
+    y(t)=y(t)+py(i+1)*bin
+end
+
+fplot(x(t), y(t), [0, 1])
+
+%b
+plot(x(0.3), y(0.3), 'mx')
+%c
+
+dx(t)=diff(x(t), t);
+dy(t)=diff(y(t), t);
+
+quiver(x(0.3), y(0.3), dx(0.3), dy(0.3))
